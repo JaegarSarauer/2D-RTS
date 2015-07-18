@@ -6,10 +6,24 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprites name="itemSprites">
+      <sprite>sprites\spr_Cloud</sprite>
+    </sprites>
     <sprites name="characterSprites"/>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <backgrounds name="gameBackground">
+      <background>background\background_game</background>
+    </backgrounds>
+  </backgrounds>
   <paths name="paths"/>
+  <objects name="objects">
+    <objects name="game">
+      <objects name="gameplay"/>
+    </objects>
+    <objects name="menu"/>
+    <object>objects\graphicHandler</object>
+  </objects>
   <rooms name="rooms">
     <room>rooms\gameRoom</room>
     <room>rooms\menuRoom</room>

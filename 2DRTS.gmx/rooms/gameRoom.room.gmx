@@ -2,13 +2,13 @@
 <room>
   <caption></caption>
   <width>1024</width>
-  <height>768</height>
+  <height>320</height>
   <vsnap>32</vsnap>
   <hsnap>32</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
-  <colour>12632256</colour>
+  <colour>13875756</colour>
   <showcolour>-1</showcolour>
   <code></code>
   <enableViews>0</enableViews>
