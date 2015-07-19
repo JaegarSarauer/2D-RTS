@@ -112,6 +112,10 @@ global.DEBUGGING = true;
             worldObjects[| onBlock] = temp;
             aTree = true
             onBlock += 5;
+        } else if (floor(random(10)) == 0) {
+            var temp = scr_createWorldMine(blockSize * onBlock, groundLevel, blockSize);     
+            worldObjects[| onBlock] = temp;
+            onBlock += 2;
         } else {
             worldObjects[| onBlock] = 0;
         }

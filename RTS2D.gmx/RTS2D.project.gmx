@@ -20,7 +20,10 @@
     <sprites name="objectSprites">
       <sprite>sprites\spritesTree</sprite>
       <sprite>sprites\icons</sprite>
+      <sprite>sprites\spritesMine</sprite>
+      <sprite>sprites\spritesDirt</sprite>
     </sprites>
+    <sprite>sprites\gameGUI</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="gameBackground">
@@ -32,6 +35,7 @@
   <scripts name="scripts">
     <script>scripts\scr_createWorldObject.gml</script>
     <script>scripts\scr_createWorldTree.gml</script>
+    <script>scripts\scr_createWorldMine.gml</script>
     <script>scripts\scr_moveSelectedNPC.gml</script>
     <script>scripts\scr_locationSelected.gml</script>
   </scripts>
@@ -46,7 +50,9 @@
         <objects name="objects">
           <object>objects\objectBlockParent</object>
           <object>objects\objectBlockLeaf</object>
+          <object>objects\objectBlockMineChild</object>
           <object>objects\objectBlockStump</object>
+          <object>objects\objectBlockMine</object>
         </objects>
         <objects name="graphics">
           <object>objects\graphicCloud</object>
