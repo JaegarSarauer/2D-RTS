@@ -25,15 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//cloud spawning
-alarm[0] = random_range(30, 300);
-clouds = 0;
+            <string>//the recorded position of a click
+clickX = 0;
+clickY = 0;
+change = 0;
+curViewX = 0;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="0">
+    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,12 +52,39 @@ clouds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (clouds &lt; 10) {
-    clouds++;
-    instance_create(-100, random(room_height / 2), graphicCloud)
-    alarm[0] = random_range(30, 300)
-} else {
-    alarm[0] = random_range(30, 50)
+            <string>clickX = mouse_x
+clickY = mouse_y
+curViewX = view_xview[0];
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+change = (view_xview[0] + clickX - mouse_x)
+if (change &gt;= 0 &amp;&amp; change &lt;= room_width - view_wview[0]) {
+    view_xview[0] = change;
+} else if (change &lt; 0) {
+    view_xview[0] = 0;
+} else if (change &gt; room_width - view_wview[0]) {
+    view_xview[0] = room_width - view_wview[0]
 }
 </string>
           </argument>

@@ -11,7 +11,7 @@
   <colour>13875756</colour>
   <showcolour>-1</showcolour>
   <code></code>
-  <enableViews>0</enableViews>
+  <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
@@ -31,8 +31,8 @@
     <yoffset>0</yoffset>
   </makerSettings>
   <backgrounds>
-    <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
-    <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
+    <background visible="-1" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
+    <background visible="0" foreground="0" name="" x="0" y="320" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -41,8 +41,8 @@
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
   </backgrounds>
   <views>
-    <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
-    <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
+    <view visible="-1" objName="" xview="0" yview="0" wview="640" hview="320" xport="0" yport="0" wport="640" hport="320" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
+    <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="320" xport="0" yport="320" wport="1024" hport="320" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
@@ -50,8 +50,45 @@
     <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
-  <instances/>
-  <tiles/>
+  <instances>
+    <instance objName="graphicHandler" x="32" y="32" name="inst_6A64CB88" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="graphicHandler" x="32" y="32" name="inst_1877109E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="tapHandler" x="32" y="64" name="inst_34B80816" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+  </instances>
+  <tiles>
+    <tile bgName="foreground_game" x="0" y="192" w="64" h="64" xo="0" yo="0" id="10000002" name="inst_F419490B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="64" y="192" w="64" h="64" xo="64" yo="0" id="10000003" name="inst_1A0607D0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="128" y="192" w="64" h="64" xo="128" yo="0" id="10000004" name="inst_53E0224B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="192" y="192" w="64" h="64" xo="192" yo="0" id="10000005" name="inst_832912D1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="320" y="192" w="64" h="64" xo="192" yo="0" id="10000006" name="inst_AA4694E7" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="448" y="192" w="64" h="64" xo="192" yo="0" id="10000007" name="inst_2D8C3AFA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="256" y="192" w="64" h="64" xo="64" yo="0" id="10000008" name="inst_5BDA367A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="384" y="192" w="64" h="64" xo="64" yo="0" id="10000009" name="inst_E8B73816" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="512" y="192" w="64" h="64" xo="0" yo="0" id="10000010" name="inst_21E9EFF1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="640" y="192" w="64" h="64" xo="0" yo="0" id="10000011" name="inst_0B050599" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="768" y="192" w="64" h="64" xo="64" yo="0" id="10000012" name="inst_60769E7C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="896" y="192" w="64" h="64" xo="128" yo="0" id="10000013" name="inst_D907CA4B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="960" y="192" w="64" h="64" xo="192" yo="0" id="10000015" name="inst_4AADC58F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="832" y="192" w="64" h="64" xo="192" yo="0" id="10000016" name="inst_C2AB1569" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="704" y="192" w="64" h="64" xo="64" yo="0" id="10000018" name="inst_06AE892A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="576" y="192" w="64" h="64" xo="64" yo="0" id="10000019" name="inst_1204CDB6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="128" y="256" w="64" h="64" xo="128" yo="64" id="10000020" name="inst_7834F7D0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="896" y="256" w="64" h="64" xo="128" yo="64" id="10000021" name="inst_479676B6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="0" y="256" w="64" h="64" xo="64" yo="64" id="10000022" name="inst_F402A157" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="64" y="256" w="64" h="64" xo="64" yo="64" id="10000023" name="inst_72E445B5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="192" y="256" w="64" h="64" xo="64" yo="64" id="10000024" name="inst_E43F292C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="256" y="256" w="64" h="64" xo="64" yo="64" id="10000025" name="inst_128B2812" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="320" y="256" w="64" h="64" xo="64" yo="64" id="10000026" name="inst_C908461A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="384" y="256" w="64" h="64" xo="64" yo="64" id="10000027" name="inst_A0D6AE54" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="448" y="256" w="64" h="64" xo="64" yo="64" id="10000028" name="inst_BDCC7678" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="512" y="256" w="64" h="64" xo="64" yo="64" id="10000029" name="inst_6DCD808B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="576" y="256" w="64" h="64" xo="64" yo="64" id="10000031" name="inst_685D15E1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="640" y="256" w="64" h="64" xo="64" yo="64" id="10000032" name="inst_7FBDB0A2" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="704" y="256" w="64" h="64" xo="64" yo="64" id="10000033" name="inst_632AC5CB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="768" y="256" w="64" h="64" xo="64" yo="64" id="10000034" name="inst_5F911551" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="832" y="256" w="64" h="64" xo="64" yo="64" id="10000035" name="inst_E6478337" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="foreground_game" x="960" y="256" w="64" h="64" xo="64" yo="64" id="10000036" name="inst_AB59861E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+  </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
   <PhysicsWorldLeft>0</PhysicsWorldLeft>
