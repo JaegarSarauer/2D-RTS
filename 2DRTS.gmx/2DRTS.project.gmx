@@ -6,28 +6,13 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprites name="tempCharacterSprites">
-      <sprites name="tempHeads">
-        <sprite>sprites\personHeads</sprite>
-      </sprites>
-      <sprites name="tempTorso">
-        <sprite>sprites\personTorso</sprite>
-      </sprites>
-      <sprites name="tempLegs">
-        <sprite>sprites\personLegs</sprite>
-      </sprites>
-      <sprites name="tempArms">
-        <sprite>sprites\personArms</sprite>
-      </sprites>
-      <sprites name="tempHands">
-        <sprite>sprites\personHands</sprite>
-      </sprites>
-    </sprites>
     <sprites name="itemSprites">
       <sprite>sprites\spr_Cloud</sprite>
     </sprites>
-    <sprite>sprites\sprite2</sprite>
-    <sprite>sprites\mask_person</sprite>
+    <sprites name="characterSprites"/>
+    <sprites name="objectSprites">
+      <sprite>sprites\spritesTree</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="gameBackground">
@@ -37,19 +22,21 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\MoveSelectedNPC.gml</script>
+    <script>scripts\scr_createWorldObject.gml</script>
+    <script>scripts\scr_createWorldTree.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="game">
-      <object>objects\NPCParent</object>
-      <object>objects\NPCParentPerson</object>
-      <object>objects\NPCManager</object>
-    </objects>
-    <object>objects\graphicHandler</object>
       <objects name="gameplay">
         <objects name="control objects">
           <object>objects\graphicHandler</object>
           <object>objects\tapHandler</object>
+          <object>objects\worldManager</object>
+        </objects>
+        <objects name="objects">
+          <object>objects\objectBlockParent</object>
+          <object>objects\objectBlockLeaf</object>
+          <object>objects\objectBlockStump</object>
         </objects>
         <objects name="graphics">
           <object>objects\graphicCloud</object>

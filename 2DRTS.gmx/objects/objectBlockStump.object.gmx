@@ -29,7 +29,7 @@
 logList = ds_list_create();
 leafList = ds_list_create();
 logs = 0;
-
+leafless = false;
 </string>
           </argument>
         </arguments>
@@ -56,12 +56,13 @@ logs = 0;
     with logList[| ds_list_size(logList) - 1] instance_destroy();
     ds_list_delete(logList, ds_list_size(logList)- 1)
     
-    if (!ds_list_) {
+    if (!leafless) {
         for(i = 0; i &lt; ds_list_size(leafList); i++)
         with leafList[| i] {
             event_user(0);
         }
         ds_list_destroy(leafList);
+        leafless = true;
     }
 }
 </string>
