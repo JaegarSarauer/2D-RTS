@@ -24,6 +24,8 @@
       <sprite>sprites\spritesDirt</sprite>
     </sprites>
     <sprite>sprites\gameGUI</sprite>
+    <sprite>sprites\sprite13</sprite>
+    <sprite>sprites\interfaceSprites</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="gameBackground">
@@ -38,11 +40,18 @@
     <script>scripts\scr_createWorldMine.gml</script>
     <script>scripts\scr_moveSelectedNPC.gml</script>
     <script>scripts\scr_locationSelected.gml</script>
+    <script>scripts\scr_showInterface.gml</script>
+    <script>scripts\scr_addItem.gml</script>
+    <script>scripts\scr_removeItem.gml</script>
+    <script>scripts\scr_getItemDurability.gml</script>
+    <script>scripts\scr_getItemSprite.gml</script>
+    <script>scripts\scr_getItemSubimage.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="game">
       <objects name="gameplay">
         <objects name="control objects">
+          <object>objects\gameGUIManager</object>
           <object>objects\graphicHandler</object>
           <object>objects\tapHandler</object>
           <object>objects\worldManager</object>
@@ -63,6 +72,14 @@
     <object>objects\NPCParentPerson</object>
     <object>objects\NPCParent</object>
     <object>objects\NPCManager</object>
+    <objects name="GUI">
+      <object>objects\interfaceManager</object>
+      <object>objects\inventoryInterface</object>
+    </objects>
+    <object>objects\itemParent</object>
+    <object>objects\itemTool</object>
+    <object>objects\inventoryManager</object>
+    <object>objects\itemDefinitions</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\gameRoom</room>
