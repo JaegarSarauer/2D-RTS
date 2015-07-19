@@ -25,11 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//the recorded position of a click
-clickX = 0;
-clickY = 0;
-change = 0;
-curViewX = 0;
+            <string>randomize();
+//block size
+blockSize = 64;
+
+//how many blocks wide is the world
+blocksWorld = room_width / blockSize;
+
+//where the ground is
+groundLevel = room_height - 128
+
+//do we need to generate the world?
+generate = true;
 </string>
           </argument>
         </arguments>
@@ -52,26 +59,20 @@ curViewX = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if mouse_check_button_pressed(mb_left) {
-    clickX = mouse_x
-    clickY = mouse_y
-}
-
-
-if mouse_check_button(mb_left) {
-
-
-    view_xview = clickX - (mouse_x - view_xview)
-    view_xview = max(0, min(view_xview, room_width - view_wview))
-
-/*    change = (view_xview[0] + clickX - mouse_x)
-    if (change &lt; 0) {
-        view_xview[0] = 0;
-    } else if (change &gt; room_width - view_wview[0]) {
-        view_xview[0] = room_width - view_wview[0]
-    } else if (change &gt;= 0 &amp;&amp; change &lt;= room_width - view_wview[0]) {
-        view_xview[0] = change;
-    }*/
+            <string>if (generate == true) {
+    //create trees
+    var onBlock = 0;
+    var aTree = false; //is there at least one tree?
+    while(onBlock &lt; blocksWorld ) {
+        if (floor(random(10)) == 0) {
+            scr_createWorldTree(round(random_range(2,5)), blockSize * onBlock, groundLevel, blockSize);            
+            aTree = true
+            onBlock += 5;
+        }
+        onBlock++;
+    }
+    if (aTree)
+    generate = false;
 }
 </string>
           </argument>
