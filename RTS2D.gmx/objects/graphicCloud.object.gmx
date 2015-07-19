@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>move = random_range(random_range(-.1, .1), random_range(-.5, .5));
-ind = round(random(spr_Cloud.image_number));
+ind = round(random(image_number));
 </string>
           </argument>
         </arguments>

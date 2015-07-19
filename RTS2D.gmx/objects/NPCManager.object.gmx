@@ -28,7 +28,7 @@
             <string>Selected = false;
 lastSelected = false;
 DebugString = "";
-
+Selector = false;
 </string>
           </argument>
         </arguments>
@@ -84,7 +84,11 @@ DebugString = "";
           <argument>
             <kind>1</kind>
             <string>if (!place_meeting(mouse_x, mouse_y, NPCParentPerson)) {
-    scr_locationSelected(mouse_x);
+    if (mouse_y &gt; room_height/3) {
+        if (Selector == false) {
+            Selector = scr_locationSelected(mouse_x);
+        }
+    }
 }
 </string>
           </argument>

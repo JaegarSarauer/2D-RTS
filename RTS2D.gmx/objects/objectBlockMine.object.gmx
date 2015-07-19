@@ -30,6 +30,8 @@ mineList = ds_list_create();
 depthOfMine = 10;
 ores = depthOfMine * 2;
 deleting = false;
+type = "Mine";
+
 </string>
           </argument>
         </arguments>
@@ -60,6 +62,8 @@ deleting = false;
         }
     }
     ds_list_destroy(mineList);
+    var column = x / worldManager.blockSize;
+    worldManager.worldObjects[|column] = 0;
     with self instance_destroy();
 }
 </string>

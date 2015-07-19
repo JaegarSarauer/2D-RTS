@@ -29,7 +29,9 @@
 sprTorsoRot = 0;
 
 sprArm1Rot = 0;
+sprArm1OffsetRot = 0;
 sprArm2Rot = 0;
+sprArm2OffsetRot = 0;
 
 sprLeg1Rot = 0;
 sprLeg2Rot = 0;
@@ -59,6 +61,7 @@ sprLeg1Swing = 0;
 sprLeg2Swing = 0;
 
 swingBeat = 1;
+override = false;
 
 maxRot = 40;
 swingSpeed = 4;
@@ -67,7 +70,7 @@ handsSeperate = false;
 
 //-1 means done, not moving to anything.
 MoveTo = -1;
-moveTo = 0;
+moveTo = -1;
 moveSpeed = 8;
 </string>
           </argument>
@@ -152,87 +155,130 @@ if (moveTo != x) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (moving) {
-    if (sprArm1Swing == 1) {
-        sprArm1Rot += swingSpeed;
-    } else {
-        sprArm1Rot -= swingSpeed;
-    }
-    
-    if (sprArm2Swing == 1) {
-        sprArm2Rot += swingSpeed;
-    } else {
-        sprArm2Rot -= swingSpeed;
-    }
-    
-    if (sprLeg1Swing == 1) {
-        sprLeg1Rot += swingSpeed;
-    } else {
-        sprLeg1Rot -= swingSpeed;
-    }
-    
-    if (sprLeg2Swing == 1) {
-        sprLeg2Rot += swingSpeed;
-    } else {
-        sprLeg2Rot -= swingSpeed;
-    }
-    
-    if (abs(sprArm1Rot) &gt;= maxRot) {
+            <string>if (!override) {
+    if (moving) {
         if (sprArm1Swing == 1) {
-            sprArm1Swing = 2;
-            swingBeat = 2;
+            sprArm1Rot += swingSpeed;
         } else {
-            sprArm1Swing = 1;
-            swingBeat = 1;
+            sprArm1Rot -= swingSpeed;
+        }
+        
+        if (sprArm2Swing == 1) {
+            sprArm2Rot += swingSpeed;
+        } else {
+            sprArm2Rot -= swingSpeed;
+        }
+        
+        if (sprLeg1Swing == 1) {
+            sprLeg1Rot += swingSpeed;
+        } else {
+            sprLeg1Rot -= swingSpeed;
+        }
+        
+        if (sprLeg2Swing == 1) {
+            sprLeg2Rot += swingSpeed;
+        } else {
+            sprLeg2Rot -= swingSpeed;
+        }
+        
+        if (abs(sprArm1Rot) &gt;= maxRot) {
+            if (sprArm1Swing == 1) {
+                sprArm1Swing = 2;
+                swingBeat = 2;
+            } else {
+                sprArm1Swing = 1;
+                swingBeat = 1;
+            }
+        }
+        
+        if (abs(sprArm2Rot) &gt;= maxRot) {
+            if (sprArm2Swing == 1)
+                sprArm2Swing = 2;
+            else
+                sprArm2Swing = 1;
+        }
+        
+        if (abs(sprLeg1Rot) &gt;= maxRot) {
+            if (sprLeg1Swing == 1)
+                sprLeg1Swing = 2;
+            else
+                sprLeg1Swing = 1;
+        }
+        
+        if (abs(sprLeg2Rot) &gt;= maxRot) {
+            if (sprLeg2Swing == 1)
+                sprLeg2Swing = 2;
+            else
+                sprLeg2Swing = 1;
+        }
+    } else if (!moving) {
+        if (abs(sprArm1Rot) &lt; maxRot) {
+            if (abs(sprArm1Rot) &gt; 0) {
+                if (sprArm1Rot &gt; 0)
+                    sprArm1Rot -= swingSpeed;
+                else 
+                    sprArm1Rot += swingSpeed;
+            }
+        } else {
+            sprArm1Rot += swingSpeed;
+        }
+        
+        if (abs(sprArm2Rot) &lt; maxRot) {
+             if (abs(sprArm2Rot) &gt; 0) {
+                if (sprArm2Rot &gt; 0)
+                    sprArm2Rot -= swingSpeed;
+                else 
+                    sprArm2Rot += swingSpeed;
+             }
+        } else {
+            sprArm2Rot -= swingSpeed;
+        }
+         
+         if (abs(sprLeg1Rot) &gt; 0) {   
+            if (sprLeg1Rot &gt; 0)
+                sprLeg1Rot -= swingSpeed;
+            else 
+                sprLeg1Rot += swingSpeed;
+         }
+         
+          if (abs(sprLeg2Rot) &gt; 0) {        
+            if (sprLeg2Rot &gt; 0)
+                sprLeg2Rot -= swingSpeed;
+            else 
+                sprLeg2Rot += swingSpeed;
+        }
+    }
+
+    if (image_alpha &lt; 1)
+        image_alpha += 2/room_speed;
+    
+    if (abs(sprArm1OffsetRot) &gt; 0) {
+        if (sprArm1OffsetRot &gt; 0) {
+            sprArm1OffsetRot -= swingSpeed;
+            if (sprArm1OffsetRot &lt; swingSpeed) {
+                sprArm1OffsetRot = 0;
+            }
+        } else if (sprArm1OffsetRot &lt; 0) {
+            sprArm1OffsetRot += swingSpeed;
+            if (sprArm1OffsetRot &gt; -swingSpeed) {
+                sprArm1OffsetRot = 0;
+            }
         }
     }
     
-    if (abs(sprArm2Rot) &gt;= maxRot) {
-        if (sprArm2Swing == 1)
-            sprArm2Swing = 2;
-        else
-            sprArm2Swing = 1;
+    if (abs(sprArm2OffsetRot) &gt; 0) {
+        if (sprArm2OffsetRot &gt; 0) {
+            sprArm2OffsetRot -= swingSpeed;
+            if (sprArm2OffsetRot &lt; swingSpeed) {
+                sprArm2OffsetRot = 0;
+            }
+        } else if (sprArm2OffsetRot &lt; 0) {
+            sprArm2OffsetRot += swingSpeed;
+            if (sprArm2OffsetRot &gt; -swingSpeed) {
+                sprArm2OffsetRot = 0;
+            }
+        }
     }
-    
-    if (abs(sprLeg1Rot) &gt;= maxRot) {
-        if (sprLeg1Swing == 1)
-            sprLeg1Swing = 2;
-        else
-            sprLeg1Swing = 1;
-    }
-    
-    if (abs(sprLeg2Rot) &gt;= maxRot) {
-        if (sprLeg2Swing == 1)
-            sprLeg2Swing = 2;
-        else
-            sprLeg2Swing = 1;
-    }
-} else {
-    if (abs(sprArm1Rot) &gt; 0) {
-        if (sprArm1Rot &gt; 0)
-            sprArm1Rot -= swingSpeed;
-        else 
-            sprArm1Rot += swingSpeed;
-        
-        if (sprArm2Rot &gt; 0)
-            sprArm2Rot -= swingSpeed;
-        else 
-            sprArm2Rot += swingSpeed;
-        
-        if (sprLeg1Rot &gt; 0)
-            sprLeg1Rot -= swingSpeed;
-        else 
-            sprLeg1Rot += swingSpeed;
-        
-        if (sprLeg2Rot &gt; 0)
-            sprLeg2Rot -= swingSpeed;
-        else 
-            sprLeg2Rot += swingSpeed;
-    }
-}
-
-if (MoveTo != -1 &amp;&amp; moving == false) {
-    event_user(3);
 }
 </string>
           </argument>
@@ -490,27 +536,26 @@ if (swingBeat == 1) {
             <kind>1</kind>
             <string>var xScale = 1;
 
-var dirAdd = 0;
 var leg1Rot = sprLeg1Rot;
 var leg2Rot = sprLeg2Rot;
-var arm1Rot = sprArm1Rot;
-var arm2Rot = sprArm2Rot;
+var arm1Rot = sprArm1Rot + sprArm1OffsetRot;
+var arm2Rot = sprArm2Rot + sprArm2OffsetRot;
 
 if (movingDir == "Right") {
     xScale = -1;
-    dirAdd = 180;
 }
     
-draw_sprite_ext(sprLegs, sprLegsIndex, x + sprLegsOffsetX, y + sprLegsOffsetY, xScale, 1, leg1Rot, sprLegsColor, 1);
-draw_sprite_ext(sprLegs, sprLegsIndex, x + sprLegsOffsetX, y + sprLegsOffsetY, xScale, 1, leg2Rot, sprLegsColor, 1);
-draw_sprite_ext(sprArms, sprArmsIndex, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm1Rot, sprArmsColor, 1);
+
+draw_sprite_ext(sprArms, sprArmsIndex, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm1Rot, sprArmsColor, image_alpha);
 if (handsSeperate) 
-    draw_sprite_ext(sprHands, 0, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm1Rot, c_white, 1);
-draw_sprite_ext(sprTorso, sprTorsoIndex, x + sprTorsoOffsetX, y + sprTorsoOffsetY, xScale, 1, sprTorsoRot, sprTorsoColor, 1);
-draw_sprite_ext(sprArms, sprArmsIndex, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm2Rot, sprArmsColor, 1);
+    draw_sprite_ext(sprHands, 0, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm1Rot, c_white, image_alpha);
+draw_sprite_ext(sprLegs, sprLegsIndex, x + sprLegsOffsetX, y + sprLegsOffsetY, xScale, 1, leg1Rot, sprLegsColor, image_alpha);
+draw_sprite_ext(sprLegs, sprLegsIndex, x + sprLegsOffsetX, y + sprLegsOffsetY, xScale, 1, leg2Rot, sprLegsColor, image_alpha);
+draw_sprite_ext(sprTorso, sprTorsoIndex, x + sprTorsoOffsetX, y + sprTorsoOffsetY, xScale, 1, sprTorsoRot, sprTorsoColor, image_alpha);
+draw_sprite_ext(sprArms, sprArmsIndex, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm2Rot, sprArmsColor, image_alpha);
 if (handsSeperate) 
-    draw_sprite_ext(sprHands, 0, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm2Rot, c_white, 1);
-draw_sprite_ext(sprHead, sprHeadIndex, x + sprHeadOffsetX, y + sprHeadOffsetY, xScale, 1, sprHeadRot, sprHeadColor, 1);
+    draw_sprite_ext(sprHands, 0, x + sprArmsOffsetX, y + sprArmsOffsetY, xScale, 1, arm2Rot, c_white, image_alpha);
+draw_sprite_ext(sprHead, sprHeadIndex, x + sprHeadOffsetX, y + sprHeadOffsetY, xScale, 1, sprHeadRot, sprHeadColor, image_alpha);
 </string>
           </argument>
         </arguments>

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,10 +27,176 @@
             <kind>1</kind>
             <string>column = floor(x / worldManager.blockSize);
 
-toDraw[0] = "Walking";
-toDraw[1] = "Help";
+dismiss = false;
 
-//get ID from worldManager.
+//0 is icon index, 1 is callback, 2 is current y, 3 is end y
+var i = 0;
+toDraw[i,0] = 0;
+toDraw[i,1] = "Walk";
+toDraw[i,2] = y;
+toDraw[i,3] = y - 96;
+i++;
+
+toDraw[i,0] = 1;
+toDraw[i,1] = "Info";
+toDraw[i,2] = y;
+toDraw[i,3] = y - 192;
+i++;
+
+var obj = worldManager.worldObjects[|column];
+
+if (obj != 0) {
+    switch (obj.type) {
+        case "Tree": 
+        toDraw[i,0] = 2;
+        toDraw[i,1] = "Tree";
+        toDraw[i,2] = y;
+        toDraw[i,3] = y - (i+1)*96;
+        i++;
+        break;
+        case "Mine": 
+        toDraw[i,0] = 3;
+        toDraw[i,1] = "Mine";
+        toDraw[i,2] = y;
+        toDraw[i,3] = y - (i+1)*96;
+        i++;
+        break;
+    }
+}
+
+count = i;
+collapseTo = -1;
+grow = 1;
+alpha = 1;
+fade = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(collapseTo == -1) {
+    for(var i = 0; i &lt; count; i++) {
+        if (toDraw[i, 2] &gt; toDraw[i, 3]) {
+            toDraw[i, 2] -= 4 * (1+i); 
+        }
+    }
+} else {
+    if (fade)
+        alpha -= 1/room_speed;
+    for(var i = 0; i &lt; count; i++) {
+        if(i == collapseTo)
+            continue;
+            
+        if (toDraw[i, 2] &gt; toDraw[collapseTo, 2]) {
+            toDraw[i, 2] -= 8; 
+        }
+        if (toDraw[i, 2] &lt; toDraw[collapseTo, 2]) {
+            toDraw[i, 2] += 8; 
+        }
+        
+        if (abs(toDraw[i, 2])-abs(toDraw[collapseTo, 2]) &lt; 10) {
+            fade = true;
+        }
+    }
+}
+
+if ((alpha &lt; -1 &amp;&amp; !dismiss) || (alpha &lt;= 0 &amp;&amp; dismiss)) {
+    NPCManager.Selector = false;
+    instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (mouse_x &gt;= x-48 &amp;&amp; mouse_x &lt;= x+48) {
+    for(var i = 0; i &lt; count; i++) {
+        if (mouse_y &lt; toDraw[i,2]+48 &amp;&amp; mouse_y &gt; toDraw[i,2]-48) {
+            collapseTo = i;
+            switch(toDraw[i,1]) {
+                case "Walk":
+                    scr_moveSelectedNPC(x);
+                    break;
+                case "Info":
+                    scr_displayInfo(x);
+                    break;
+                case "Tree":
+                    scr_moveToTree(x, NPCManager.Selected);
+                    break;
+                case "Mine":
+                    scr_moveToMine(x, NPCManager.Selected);
+                    break;
+            }
+        }
+    }
+}
+if (collapseTo == -1) {
+    collapseTo = 0;
+    dismiss = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for(var i = 0; i &lt; count; i++) {
+    draw_sprite_ext(icons, toDraw[i, 0], x, toDraw[i, 2], 1, 1, 0, c_white, alpha);
+}
+
+if (collapseTo != -1 &amp;&amp; dismiss == false) {
+    draw_sprite_ext(icons, toDraw[collapseTo, 0], x, toDraw[collapseTo, 2], grow, grow, 0, c_white, alpha + 1);
+}
 </string>
           </argument>
         </arguments>

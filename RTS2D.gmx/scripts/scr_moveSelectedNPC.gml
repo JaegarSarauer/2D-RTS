@@ -7,3 +7,6 @@ var xPos = argument0;
 var columnNo = floor(xPos/columnSize);
 
 NPCManager.Selected.MoveTo = columnNo * columnSize + columnSize/2;
+with NPCManager.Selected {
+    scr_changeCommand(3);
+}

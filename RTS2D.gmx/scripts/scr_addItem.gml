@@ -26,11 +26,12 @@ if (instance_exists(inventoryManager)) {
     if (inventoryManager.inventorySpaces > size) {
         inventoryManager.items[|size] = argument0;
         if (argument2 == -1) {
-            inventoryManager.stacks[|i] += argument1;
-            inventoryManager.durability[|i] += dur * argument1;
+            inventoryManager.stacks[|size] = argument1;
+            inventoryManager.durability[|size] = dur * argument1;
+            
         } else {
-            inventoryManager.stacks[|i]++;
-            inventoryManager.durability[|i] += argument2;
+            inventoryManager.stacks[|size] = 1;
+            inventoryManager.durability[|size] = argument2;
         }
         return true;
     } else {

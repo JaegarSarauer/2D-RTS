@@ -26,8 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>items = ds_list_create();
+
 stacks = ds_list_create();
+
 durability = ds_list_create();
+
+inventorySpaces = 20;
 
 
 </string>

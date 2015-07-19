@@ -1,4 +1,11 @@
 /*
+Tools: 0-14
+-Pickaxes: 0-4
+-Axes: 5-9
+-Hammers: 10-14
+*/
+
+/*
 argument0 = the id of the item to get the durability of
 */
 switch(argument0) {

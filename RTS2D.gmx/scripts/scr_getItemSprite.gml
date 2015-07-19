@@ -8,21 +8,21 @@ switch(argument0) {
     case 2:
     case 3:
     case 4:
-        return sprPickaxes;
+        return spritePickaxes;
     //iron
     case 5:
     case 6:
     case 7:
     case 8:
     case 9:
-        return sprAxes;
+        return spriteAxes;
     //silver
     case 10:
     case 11:
     case 12:
     case 13:
     case 14:
-        return sprHammers;
+        return spriteHammers;
     default:
         return "null";
 }

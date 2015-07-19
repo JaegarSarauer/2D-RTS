@@ -44,12 +44,343 @@ sprLegsOffsetY = 24;
 sprArmsOffsetY = -10;
 Highlight = false;
 doTap = false;
+
+//0 is no, 1 is upswing, 2 is downswing
+chopping = 0;
+mining = false;
+previousCommand[0] = "null";
+previousCommand[1] = false;
+
+inventorySize = 5;
+for(var i = 0; i &lt; inventorySize; i++) {
+    Inventory[i, 0] = -1; //item ID
+    Inventory[i, 1] = -1; //durability
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (moving == false &amp;&amp; override == false) {
+    alarm[5] = 30;
+    override = true;
+}
+
+if (moving == true &amp;&amp; override == false) {
+    alarm[5] = 1;
+}
+
+if (moving == false &amp;&amp; override == true) {
+    var column = floor(x/64);
+    var stockPile = worldManager.worldObjects[|column];
+    
+    if(scr_unloadItemInInventory()) {
+        alarm[5] = 30;
+    } else {
+        if (previousCommand[0] != "Null") {
+            override = false;
+            alarm[5] = -1;
+            switch(previousCommand[0]) {
+                case "Tree": 
+                scr_moveToTree(previousCommand[1]*64, id);
+                break;
+                case "Mine": 
+                scr_moveToMine(previousCommand[1]*64, id);
+                break;
+            }
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Unload inventory called</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_unloadInventory();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Mining</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (moving == false &amp;&amp; override == false) {
+    var column = floor(x/64);
+    
+    var mine = worldManager.worldObjects[|column];
+    if (mine.ores &gt; 0) {
+        mining = 1;
+        alarm[3] = 30;
+    }
+    override = true;
+}
+
+if (moving == true &amp;&amp; override == false) {
+    alarm[3] = 1;
+}
+
+if (moving == false &amp;&amp; override == true) {
+    var column = floor(x/64);
+    
+    var mine = worldManager.worldObjects[|column];
+    if (mine != 0) {
+        if (mine.ores &gt; 0) {
+            if (image_alpha &lt;= 0) {
+                if(scr_addToInventory(scr_getMineItem(), 1)) {
+                    mine.ores--;
+                    if (mine.ores == 0) {
+                        mining = false;
+                        override = false;
+                        previousCommand[0] = "Mine";
+                        previousCommand[1] = column;
+                        alarm[4] = room_speed;
+                        alarm[3] = -1;
+                    } else {
+                        alarm[3] = 30;
+                    }
+                } else {
+                    mining = false;
+                    override = false;
+                    alarm[3] = -1;
+                    previousCommand[0] = "Mine";
+                    previousCommand[1] = column;
+                    alarm[4] = room_speed;
+                }
+            } else {
+                alarm[3] = 1;
+                image_alpha -= 1/room_speed;
+            }
+        }
+    } else {
+        mining = false;
+        override = false;
+        previousCommand[0] = "Mine";
+        previousCommand[1] = column;
+        alarm[4] = room_speed;
+        alarm[3] = -1;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Cutting tree</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (moving == false &amp;&amp; override == false) {
+    var xPos = x;
+    
+    //error on xPos being where it would be, but Left or Right makes it think its one off.
+    if (movingDir == "Left")
+        xPos -= 64;
+    else
+        xPos += 64;
+        
+    var column = floor(xPos/64);
+    
+    var tree = worldManager.worldObjects[|column];
+    if (tree.logs &gt; 0) {
+        chopping = 1;
+        alarm[2] = 30;
+    }
+    override = true;
+}
+
+if (moving == true &amp;&amp; override == false) {
+    alarm[2] = 1;
+}
+
+if (moving == false &amp;&amp; override == true) {
+    var xPos = x;
+    if (movingDir == "Left")
+        xPos -= 64;
+    else
+        xPos += 64;
+    var column = floor(xPos/64);
+    
+    var tree = worldManager.worldObjects[|column];
+    if (tree != 0) {
+        if (tree.logs &gt; 0) {
+            if(scr_addToInventory(scr_getTreeItem(tree.logs, tree.seeds), 1)) {
+                tree.logs--;
+                if (tree.logs == 0) {
+                    chopping = false;
+                    override = false;
+                    previousCommand[0] = "Tree";
+                    previousCommand[1] = column;
+                    alarm[4] = room_speed;
+                    alarm[2] = -1;
+                } else {
+                    alarm[2] = 30;
+                }
+            } else {
+                chopping = false;
+                override = false;
+                previousCommand[0] = "Tree";
+                previousCommand[1] = column;
+                alarm[4] = room_speed;
+                alarm[2] = -1;
+            }
+        }
+    } else {
+        chopping = false;
+        override = false;
+        previousCommand[0] = "Tree";
+        previousCommand[1] = column;
+        alarm[4] = room_speed;
+        alarm[2] = -1;
+    }
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Tap timer</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -67,6 +398,56 @@ doTap = false;
           <argument>
             <kind>1</kind>
             <string>doTap = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+if (override &amp;&amp; chopping != 0 &amp;&amp; moving == false) {
+    if (movingDir == "Right") {
+        if (chopping == 1 &amp;&amp; (sprArm2Rot + sprArm2OffsetRot) &lt; 120) {
+            sprArm2OffsetRot+=4;
+        } else if (chopping == 1 &amp;&amp; (sprArm2Rot + sprArm2OffsetRot) &gt;= 120) {
+            chopping = 2;
+            sprArm2OffsetRot-=8;
+        } else  if (chopping == 2 &amp;&amp; (sprArm2Rot + sprArm2OffsetRot) &gt; 60) {
+            sprArm2OffsetRot-=8;
+        } else if (chopping == 2 &amp;&amp; (sprArm2Rot + sprArm2OffsetRot) &lt;= 60) {
+            chopping = 1;
+            sprArm2OffsetRot+=4;
+        }
+    } else {
+        if (chopping == 1 &amp;&amp; (sprArm1Rot + sprArm1OffsetRot) &gt; -120) {
+            sprArm1OffsetRot-=4;
+        } else if (chopping == 1 &amp;&amp; (sprArm1Rot + sprArm1OffsetRot) &lt;= -120) {
+            chopping = 2;
+            sprArm1OffsetRot+=8;
+        } else  if (chopping == 2 &amp;&amp; (sprArm1Rot + sprArm1OffsetRot) &lt; -60) {
+            sprArm1OffsetRot+=8;
+        } else if (chopping == 2 &amp;&amp; (sprArm1Rot + sprArm1OffsetRot) &gt;= -60) {
+            chopping = 1;
+            sprArm1OffsetRot-=4;
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -127,6 +508,142 @@ doTap = false;
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Unload at stockpile</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(3);
+alarm[5] = 5;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="15">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Kill mine</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(3);
+alarm[3] = 5;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="14">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Kill tree</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(3);
+alarm[2] = 5;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -145,14 +662,19 @@ doTap = false;
           <argument>
             <kind>1</kind>
             <string>if (Highlight) {
-    draw_set_alpha(.9);
+    draw_set_alpha(image_alpha);
     draw_set_colour(c_orange);
     var offset = 30 * abs(sprArm1Rot)/90
     draw_rectangle(x - 26 - offset, y - 64, x + 26 + offset, y + 60, true);
     draw_rectangle(x - 27 - offset, y - 65, x + 27 + offset, y + 60, true);
     draw_rectangle(x - 28 - offset, y - 66, x + 28 + offset, y + 60, true);
+    draw_set_colour(c_black);
+    draw_set_alpha(1);
 }
 event_inherited();
+for(var i = 0; i &lt; 5; i++) {
+    draw_text(x - 100 + i * 40, y - 100, string(Inventory[i, 0]));
+}
 </string>
           </argument>
         </arguments>

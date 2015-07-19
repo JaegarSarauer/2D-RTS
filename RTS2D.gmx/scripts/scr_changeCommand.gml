@@ -1,0 +1,10 @@
+moving = false;
+mining = false;
+chopping = false;
+previousCommand[0] = "null";
+override = false;
+alarm[2] = -1;
+alarm[3] = -1;
+alarm[4] = -1;
+alarm[5] = -1;
+event_user(argument0);

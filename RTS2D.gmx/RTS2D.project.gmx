@@ -22,6 +22,10 @@
       <sprite>sprites\icons</sprite>
       <sprite>sprites\spritesMine</sprite>
       <sprite>sprites\spritesDirt</sprite>
+      <sprite>sprites\spritePickaxes</sprite>
+      <sprite>sprites\spriteHammers</sprite>
+      <sprite>sprites\spriteBlocks</sprite>
+      <sprite>sprites\spriteAxes</sprite>
     </sprites>
     <sprite>sprites\gameGUI</sprite>
     <sprite>sprites\sprite13</sprite>
@@ -35,17 +39,26 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\scr_addItem.gml</script>
+    <script>scripts\scr_addToInventory.gml</script>
+    <script>scripts\scr_changeCommand.gml</script>
+    <script>scripts\scr_createWorldMine.gml</script>
     <script>scripts\scr_createWorldObject.gml</script>
     <script>scripts\scr_createWorldTree.gml</script>
-    <script>scripts\scr_createWorldMine.gml</script>
-    <script>scripts\scr_moveSelectedNPC.gml</script>
-    <script>scripts\scr_locationSelected.gml</script>
-    <script>scripts\scr_showInterface.gml</script>
-    <script>scripts\scr_addItem.gml</script>
-    <script>scripts\scr_removeItem.gml</script>
+    <script>scripts\scr_displayInfo.gml</script>
     <script>scripts\scr_getItemDurability.gml</script>
     <script>scripts\scr_getItemSprite.gml</script>
     <script>scripts\scr_getItemSubimage.gml</script>
+    <script>scripts\scr_getMineItem.gml</script>
+    <script>scripts\scr_getTreeItem.gml</script>
+    <script>scripts\scr_locationSelected.gml</script>
+    <script>scripts\scr_moveSelectedNPC.gml</script>
+    <script>scripts\scr_moveToMine.gml</script>
+    <script>scripts\scr_moveToTree.gml</script>
+    <script>scripts\scr_removeItem.gml</script>
+    <script>scripts\scr_showInterface.gml</script>
+    <script>scripts\scr_unloadInventory.gml</script>
+    <script>scripts\scr_unloadItemInInventory.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="game">
@@ -55,6 +68,7 @@
           <object>objects\graphicHandler</object>
           <object>objects\tapHandler</object>
           <object>objects\worldManager</object>
+          <object>objects\objectManagerFactory</object>
         </objects>
         <objects name="objects">
           <object>objects\objectBlockParent</object>
@@ -66,12 +80,13 @@
         <objects name="graphics">
           <object>objects\graphicCloud</object>
         </objects>
+        <object>objects\tempStockPile</object>
       </objects>
+      <object>objects\objectSelector</object>
+      <object>objects\NPCParentPerson</object>
+      <object>objects\NPCParent</object>
+      <object>objects\NPCManager</object>
     </objects>
-    <object>objects\objectSelector</object>
-    <object>objects\NPCParentPerson</object>
-    <object>objects\NPCParent</object>
-    <object>objects\NPCManager</object>
     <objects name="GUI">
       <object>objects\interfaceManager</object>
       <object>objects\inventoryInterface</object>
