@@ -28,7 +28,7 @@
             <string>event_inherited();
 move = false;
 mSpeed= random_range(2,4);
-xOff = random_range(worldManager.windSpeed - 1, worldManager.windSpeed + 1);
+xOff = random_range(-1, 1);
 </string>
           </argument>
         </arguments>
@@ -54,7 +54,7 @@ xOff = random_range(worldManager.windSpeed - 1, worldManager.windSpeed + 1);
             <string>if (move == true) 
     if (y &lt; worldManager.groundLevel) {
         y += mSpeed;
-        x += xOff;
+        x += worldManager.windSpeed + xOff;
     } else {
     y = worldManager.groundLevel
     image_alpha -= 0.02
