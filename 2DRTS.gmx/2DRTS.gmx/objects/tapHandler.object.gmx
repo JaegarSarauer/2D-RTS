@@ -25,15 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//cloud spawning
-alarm[0] = random_range(300, 500);
-clouds = 0;
+            <string>//the recorded position of a click
+clickX = 0;
+clickY = 0;
+change = 0;
+curViewX = 0;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="2">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,30 +52,28 @@ clouds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>randomize();
+            <string>if mouse_check_button_pressed(mb_left) {
+    clickX = mouse_x
+    clickY = mouse_y
+}
+
+
+if mouse_check_button(mb_left) {
+
+
+    view_xview = clickX - (mouse_x - view_xview)
+    view_xview = max(0, min(view_xview, room_width - view_wview))
+
+/*    change = (view_xview[0] + clickX - mouse_x)
+    if (change &lt; 0) {
+        view_xview[0] = 0;
+    } else if (change &gt; room_width - view_wview[0]) {
+        view_xview[0] = room_width - view_wview[0]
+    } else if (change &gt;= 0 &amp;&amp; change &lt;= room_width - view_wview[0]) {
+        view_xview[0] = change;
+    }*/
+}
 </string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>

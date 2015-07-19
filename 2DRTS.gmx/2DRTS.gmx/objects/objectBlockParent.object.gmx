@@ -25,32 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//cloud spawning
-alarm[0] = random_range(300, 500);
-clouds = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>randomize();
+            <string>//the name of the sprite, must be set when created
+spriteName = spritesTree;
+
+//sprite index, must be set when created
+spriteIndex = 0;
 </string>
           </argument>
         </arguments>
@@ -73,7 +52,8 @@ clouds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>draw_sprite(spriteName, spriteIndex, x, y);
+</string>
           </argument>
         </arguments>
       </action>
