@@ -32,6 +32,7 @@
   <backgrounds name="background">
     <backgrounds name="gameBackground">
       <background>background\background_game</background>
+      <background>background\foreground_game</background>
     </backgrounds>
   </backgrounds>
   <paths name="paths"/>
@@ -45,6 +46,17 @@
       <object>objects\NPCManager</object>
     </objects>
     <object>objects\graphicHandler</object>
+      <objects name="gameplay">
+        <objects name="control objects">
+          <object>objects\graphicHandler</object>
+          <object>objects\tapHandler</object>
+        </objects>
+        <objects name="graphics">
+          <object>objects\graphicCloud</object>
+        </objects>
+      </objects>
+    </objects>
+    <objects name="menu"/>
   </objects>
   <rooms name="rooms">
     <room>rooms\gameRoom</room>
