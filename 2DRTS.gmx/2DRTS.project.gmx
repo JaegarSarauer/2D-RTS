@@ -9,10 +9,19 @@
     <sprites name="itemSprites">
       <sprite>sprites\spr_Cloud</sprite>
     </sprites>
-    <sprites name="characterSprites"/>
     <sprites name="objectSprites">
       <sprite>sprites\spritesTree</sprite>
     </sprites>
+    <sprite>sprites\sprite13</sprite>
+    <sprite>sprites\sprite12</sprite>
+    <sprite>sprites\sprite2</sprite>
+    <sprite>sprites\personTorso</sprite>
+    <sprite>sprites\personLegs</sprite>
+    <sprite>sprites\personHeads</sprite>
+    <sprite>sprites\personHands</sprite>
+    <sprite>sprites\personArms</sprite>
+    <sprite>sprites\mask_person</sprite>
+    <sprite>sprites\icons</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="gameBackground">
@@ -24,6 +33,8 @@
   <scripts name="scripts">
     <script>scripts\scr_createWorldObject.gml</script>
     <script>scripts\scr_createWorldTree.gml</script>
+    <script>scripts\scr_moveSelectedNPC.gml</script>
+    <script>scripts\scr_locationSelected.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="game">
@@ -43,7 +54,10 @@
         </objects>
       </objects>
     </objects>
-    <objects name="menu"/>
+    <object>objects\objectSelector</object>
+    <object>objects\NPCParentPerson</object>
+    <object>objects\NPCParent</object>
+    <object>objects\NPCManager</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\gameRoom</room>

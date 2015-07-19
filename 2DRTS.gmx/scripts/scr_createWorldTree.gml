@@ -21,4 +21,3 @@ treeHandler.leafList[| treeHandlerIndex++] = scr_createWorldObject(spritesTree, 
 treeHandler.leafList[| treeHandlerIndex++] = scr_createWorldObject(spritesTree, 2, objectBlockLeaf, argument1 + argument3 * 2, argument2 - (argument3 * (height + 1)));
 with treeHandler
     logs = (ds_list_size(logList) + 1) * 3;
-
