@@ -85,7 +85,14 @@ draw_rectangle(interfaceBorder,interfaceBorder,width - interfaceBorder, height -
 //drawing items
 for (i = 0; i &lt; ds_list_size(inventoryManager.items); i++) {
     var sprite = scr_getItemSprite(inventoryManager.items[|i]);
-    draw_sprite(sprite, scr_getItemSubimage(inventoryManager.items[|i]), sprite_get_xoffset(sprite) + interfaceBorder + (i % spacesPerRow)*spacesSize + (((i % spacesPerRow) - 1) * spacesPadding),sprite_get_yoffset(sprite) + interfaceBorder + floor(i / spacesPerRow)*spacesSize + ((floor(i / spacesPerRow) - 1) * spacesPadding));
+    var xx, yy;
+    xx = sprite_get_xoffset(sprite) + interfaceBorder + (i % spacesPerRow)*spacesSize + (((i % spacesPerRow) + 1) * spacesPadding);
+    yy = sprite_get_yoffset(sprite) + interfaceBorder + floor(i / spacesPerRow)*spacesSize + ((floor(i / spacesPerRow) + 1) * spacesPadding);
+    
+    draw_sprite(sprite, scr_getItemSubimage(inventoryManager.items[|i]), xx, yy);
+        draw_set_color(c_black);
+        draw_set_font(stacksFont);
+    draw_text(xx + spacesSize/2 - string_width(string(inventoryManager.stacks[|i])),yy - spacesSize /8, inventoryManager.stacks[|i]);
 }
 
 surface_reset_target();
