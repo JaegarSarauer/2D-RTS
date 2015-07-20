@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//pixel size of buttons
+            <string>newSelected = false;
+//pixel size of buttons
 sprSize = 192
 
 //amount of buttons
@@ -43,12 +44,18 @@ openInterface = 0;
 view_xview[1] = 0;
 view_yview[1] = -sprSize;
 view_hview[1] = sprSize;
-view_wview[1] = sprSize * buttons;
+view_wview[1] = view_wport[0];
 
 view_xport[1] = 0;
 view_yport[1] = 0;
 view_hport[1] = sprSize/2;
-view_wport[1] = (sprSize * buttons)/2;
+view_wport[1] =  view_wport[0];
+
+//selected unit surface
+width = (view_wport[0] - (3*sprSize/2));
+height = sprSize;
+selectedUnitSurface = surface_create(width, height);
+unitIcon = surface_create(132, 126);
 </string>
           </argument>
         </arguments>
@@ -124,9 +131,58 @@ view_wport[1] = (sprSize * buttons)/2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(gameGUI, button_indexes[0], view_xview[1],view_yview[1])
-draw_sprite(gameGUI, button_indexes[1], view_xview[1] + sprSize , view_yview[1])
-draw_sprite(gameGUI, button_indexes[2], view_xview[1] + sprSize * 2, view_yview[1])
+            <string>draw_sprite_ext(gameGUI, button_indexes[0], view_xview[1],view_yview[1], .5, 1, 0, c_white, 1);
+draw_sprite_ext(gameGUI, button_indexes[1], view_xview[1] + sprSize/2 , view_yview[1], .5, 1, 0, c_white, 1);
+draw_sprite_ext(gameGUI, button_indexes[2], view_xview[1] + width + sprSize, view_yview[1], .5, 1, 0, c_white, 1);
+
+//Selected unit GUI stuff
+if (NPCManager.Selected != false) {
+    var unit = NPCManager.Selected;
+    var interfaceBorder = 28;
+    var xIco = 132/2;
+    var yIco = 132/2;
+    //Draw the background
+    surface_set_target(selectedUnitSurface);
+    draw_rectangle(0, 0, width, height, false);
+    //borders of interface
+    for(i = 1; i &lt; ceil(width*2 / interfaceBorder)-1; i++) {
+        draw_sprite_ext(gameGUIGenerate, 5, i * interfaceBorder/2, 0, 0.5, 1, 0, c_white, 1);
+        draw_sprite_ext(gameGUIGenerate, 7, i * interfaceBorder/2, height - interfaceBorder, 0.5, 1, 0, c_white, 1);
+    }
+    for(i = 1; i &lt; ceil(height / interfaceBorder) - 1; i++) {
+        draw_sprite_ext(gameGUIGenerate, 4, 0, i * interfaceBorder, 0.5, 1, 0, c_white, 1);
+        draw_sprite_ext(gameGUIGenerate, 6, width - interfaceBorder/2, i * interfaceBorder, 0.5, 1, 0, c_white, 1);
+    }
+    //corners of inverface
+    draw_sprite_ext(gameGUIGenerate, 0, 0, 0, 0.5, 1, 0, c_white, 1);
+    draw_sprite_ext(gameGUIGenerate, 1, width - interfaceBorder/2, 0, 0.5, 1, 0, c_white, 1);
+    draw_sprite_ext(gameGUIGenerate, 2, width - interfaceBorder/2, height - interfaceBorder, 0.5, 1, 0, c_white, 1);
+    draw_sprite_ext(gameGUIGenerate, 3, 0, height - interfaceBorder, 0.5, 1, 0, c_white, 1);
+    //inside color
+    draw_set_color(make_colour_rgb(174, 118, 64));
+    draw_rectangle(interfaceBorder/2,interfaceBorder,width - interfaceBorder/2, height - interfaceBorder, false);
+    surface_reset_target();
+    
+    //Draw the icon
+    surface_set_target(unitIcon);
+    draw_sprite_ext(gameGUIFrame, 1, xIco, yIco, .5, 1, 0, c_white, 1);
+    draw_sprite_ext(unit.sprArms, unit.sprArmsIndex, xIco, yIco + 16 + unit.sprArmsOffsetY, -.5, 1, -15, unit.sprArmsColor, 1);
+    draw_sprite_ext(unit.sprHands, unit.sprArmsIndex, xIco, yIco + 16 + unit.sprArmsOffsetY, -.5, 1, -15, c_white, 1);
+    draw_sprite_ext(unit.sprLegs, unit.sprLegsIndex, xIco, yIco + 16 + unit.sprLegsOffsetY, -.5, 1, -15, c_white, 1);
+    draw_sprite_ext(unit.sprLegs, unit.sprLegsIndex, xIco, yIco + 16 + unit.sprLegsOffsetY, -.5, 1, 15, c_white, 1);
+    draw_sprite_ext(unit.sprTorso, unit.sprTorsoIndex, xIco, yIco + 16, -.5, 1, 0, unit.sprTorsoColor, 1);
+    draw_sprite_ext(unit.sprHead, unit.sprHeadIndex, xIco, yIco + 16 + unit.sprHeadOffsetY, -.5, 1, 0, c_white, 1);
+    draw_sprite_ext(unit.sprArms, unit.sprArmsIndex, xIco, yIco + 16 + unit.sprArmsOffsetY, -.5, 1, 15, unit.sprArmsColor, 1);
+    draw_sprite_ext(unit.sprHands, unit.sprArmsIndex, xIco, yIco + 16 + unit.sprArmsOffsetY, -.5, 1, 15, c_white, 1);
+    draw_sprite_ext(gameGUIFrame, 0, xIco, yIco, .5, 1, 0, c_white, 1);
+    surface_reset_target();
+    
+    
+    surface_set_target(selectedUnitSurface);
+    draw_surface(unitIcon, 0, 0);
+    surface_reset_target();
+    draw_surface(selectedUnitSurface, view_xview[1] + sprSize, view_yview[1]);
+}
 </string>
           </argument>
         </arguments>

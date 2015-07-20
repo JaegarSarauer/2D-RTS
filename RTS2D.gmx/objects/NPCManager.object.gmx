@@ -53,6 +53,9 @@ Selector = false;
             <kind>1</kind>
             <string>if (lastSelected != Selected) {
     if (lastSelected != false) {
+        with gameGUIManager {
+            newSelected = true;
+        }
         lastSelected.Highlight = false;
         Selected.Highlight = true;
         lastSelected = Selected;

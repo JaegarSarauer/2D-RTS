@@ -228,6 +228,7 @@ if (moving == false &amp;&amp; override == true) {
                         alarm[3] = 30;
                     }
                 } else {
+                    mine.ores--;
                     mining = false;
                     override = false;
                     alarm[3] = -1;
@@ -338,6 +339,7 @@ if (moving == false &amp;&amp; override == true) {
                     alarm[2] = 30;
                 }
             } else {
+                tree.logs--;
                 chopping = false;
                 override = false;
                 previousCommand[0] = "Tree";

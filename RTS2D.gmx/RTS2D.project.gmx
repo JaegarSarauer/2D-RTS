@@ -30,6 +30,8 @@
     <sprite>sprites\gameGUI</sprite>
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\interfaceSprites</sprite>
+    <sprite>sprites\gameGUIGenerate</sprite>
+    <sprite>sprites\gameGUIFrame</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="gameBackground">
@@ -60,6 +62,9 @@
     <script>scripts\scr_unloadInventory.gml</script>
     <script>scripts\scr_unloadItemInInventory.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\stacksFont</font>
+  </fonts>
   <objects name="objects">
     <objects name="game">
       <objects name="gameplay">
